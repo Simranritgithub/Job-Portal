@@ -62,7 +62,10 @@ const appRouter = createBrowserRouter([
     path:'/admin/companies/:id',
     element:<CompanySetup/>
   }
-])
+],
+{
+    basename: '/Job-Portal' 
+  })
 
 
 function App() {
