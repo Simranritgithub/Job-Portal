@@ -64,7 +64,7 @@ const appRouter = createBrowserRouter([
   }
 ],
 {
-    basename: '/Job-Portal' 
+    basename: '/Job-Portal/' 
   })
 
 
