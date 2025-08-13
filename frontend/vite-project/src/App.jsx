@@ -64,20 +64,8 @@ const appRouter = createBrowserRouter([
   }
 ],
 {
-    basename: '/Job-Portal/' 
+    basename: '/Job-Portal' 
   })
 
 
-function App() {
-  
-
-  return (
-    <>
-    
-    <RouterProvider router = {appRouter}/>
-          
-   </>
-  )
-}
-
-export default App
+export default appRouter
