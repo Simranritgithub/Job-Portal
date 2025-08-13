@@ -2,13 +2,16 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/Job-Portal/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vite + React</title>
-    <script type="module" crossorigin src="/Job-Portal/assets/index-DlWXbRf9.js"></script>
-    <link rel="stylesheet" crossorigin href="/Job-Portal/assets/index-CM4jrMHn.css">
+    <title>Redirecting...</title>
+    <script type="text/javascript">
+      // Save the current path so index.html can restore it
+      sessionStorage.redirect = location.pathname + location.search + location.hash;
+      // Redirect to your root so React Router can take over
+      window.location.href = "/Job-Portal/";
+    </script>
   </head>
   <body>
-    <div id="root"></div>
+    <p>Redirecting...</p>
   </body>
 </html>
