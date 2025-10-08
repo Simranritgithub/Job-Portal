@@ -2,10 +2,44 @@ import React from "react";
 import LatestJobCards from "./LatestJobCards";
 import { useSelector } from "react-redux";
 
-const LatestJobs = () => {
-  const { allJobs } = useSelector((state) => state.job);
 
-  console.log("Redux allJobs:", allJobs); // Check shape of data
+const LatestJobs = () => {
+  
+  const { allJobs } = useSelector((state) => state.job);
+    const {  searchText,company, location, title, Salary } = useSelector((state) => state.filter);
+     // ✅ from Redux store
+     const filteredJobs = allJobs.filter((job) => {
+      console.log("Job location:", job.location);
+console.log("Search text:", searchText);
+console.log("Match:", job.location?.toLowerCase().includes(searchText.toLowerCase()));
+
+      
+ // Check shape of data
+      const matchesSearch = job.title?.toLowerCase().includes(searchText.toLowerCase());
+      const matchesCompany =  job.company?.name?.toLowerCase().includes(searchText.toLowerCase()) 
+      
+
+    const matchesLocation = job.location
+  ?.toLowerCase()
+  .trim()
+  .includes(searchText.toLowerCase().trim());
+
+      const matchesTitle =  job.title?.toLowerCase().includes(title.toLowerCase());
+      let matchesSalary = true;
+    if (Salary) {
+       matchesSalary = job.salary >= Salary.min && job.salary <= Salary.max;
+    }
+  
+      return (
+  (matchesSearch || matchesCompany || matchesLocation) &&
+  matchesTitle &&
+  matchesSalary
+);
+
+    });
+
+  console.log("Redux allJobs:", allJobs);
+  
 
   return (
     <div className="max-w-7xl mx-auto my-20">
@@ -14,18 +48,24 @@ const LatestJobs = () => {
       </h1>
 
       <div className="grid grid-cols-3 gap-4 my-5">
-        {Array.isArray(allJobs) && allJobs.length > 0 ? (
-          allJobs.slice(0, 6).map((item) => {
-            const companyName = item.company?.name || "Unknown Company";
-            const location = item.location || "Unknown Location";
-            const title = item.title || "No Title";
+         {filteredJobs.length > 0 ? (
+          filteredJobs.slice(0, 6).map((job) => {
+            const companyName = job.company?.name || "Unknown Company";
+            const location = job.location || "Unknown Location";
+            const title = job.title || "No Title";
+
 
             return (
-              <div key={item._id}>
+              <div key={job._id}>
                 <LatestJobCards
-                  company={companyName}
-                  location={location}
-                  title={title}
+                   
+      company={companyName}
+      location={location}
+      title={title}
+      salary={job.salary}
+      jobType={job.jobType}
+      positions={job.positions}
+      job={job} 
                 />
               </div>
             );

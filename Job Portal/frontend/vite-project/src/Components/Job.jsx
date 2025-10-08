@@ -11,8 +11,8 @@ const Job = ({ job }) => {
   return (
     <div className="p-5 rounded-md shadow-xl bg-black border border-gray-100">
       <div className="flex items-center justify-between">
-        <p className="text-sm text-white">2 days ago</p>
-        <Button variant="outline" className="rounded-full" size="icon">
+        <p className="text-sm text-white mt-8">2 days ago</p>
+        <Button variant="outline" className="rounded-full mt-8" size="icon">
           <Bookmark />
         </Button>
       </div>
