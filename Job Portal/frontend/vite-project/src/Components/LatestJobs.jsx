@@ -66,6 +66,7 @@ console.log("Match:", job.location?.toLowerCase().includes(searchText.toLowerCas
       jobType={job.jobType}
       positions={job.positions}
       job={job} 
+      id={job._id}
                 />
               </div>
             );

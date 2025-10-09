@@ -2,9 +2,11 @@ import React from "react";
 import { Button } from "./ui/button";
 import { Badge } from "./ui/badge";
 import { useNavigate } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
-const LatestJobCards = ({ company, location, title, salary, jobType, positions }) => {
+const LatestJobCards = ({ company, location, title, salary, jobType, positions,id }) => {
   const navigate = useNavigate()
+  
   // Fallbacks to prevent rendering issues
   if (!company || !title || !location) return null;
 
@@ -26,7 +28,7 @@ const LatestJobCards = ({ company, location, title, salary, jobType, positions }
         </Badge>
       </div>
 
-      <Button className="h-10 mt-4 bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600 transition "onClick={() => navigate(`/description/${job._id}`)}>
+      <Button className="h-10 mt-4 bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600 transition "onClick={() => navigate(`/description/${id}`)}>
         Apply Now
       </Button>
     </div>
