@@ -4,16 +4,53 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import useGetallAdminjobs from '@/hooks/useGetallAdminjobs';
 import { Eye } from 'lucide-react';
+//import { useGetallCompanies } from '@/hooks/useGetallCompanies';
+import { useEffect, useState } from 'react';
+import axios from 'axios';
+import { COMPANY_API_END_POINT } from '../utils/constant';
 
 const AdminJobsTable = () => {
   useGetallAdminjobs();
 
   const navigate = useNavigate();
-  const { alladminjobs= [] } = useSelector(store => store.job|| {});
+  const { allJobs= [] } = useSelector(store => store.job|| {});
+  const { allJobs: job } = useSelector((store) => store.job);
+  const [companyMap, setCompanyMap] = useState({});
+
+  const { user } = useSelector((store) => store.auth);
+  //const [company, setCompany] = useState({});
+  //
   const {searchText} =useSelector(store =>store.filter);
-  const filteredJobs = alladminjobs.filter(job =>
-    job.company?.name?.toLowerCase().includes(searchText.toLowerCase())
-  );;
+  const filteredJobs = searchText 
+  ? allJobs.filter(job => job.company?.name?.toLowerCase().includes(searchText.toLowerCase()))
+  : allJobs;
+
+  console.log("All Jobs from Redux:", allJobs);
+ useEffect(() => {
+  const fetchCompanies = async () => {
+    const newMap = {};
+
+    await Promise.all(
+      allJobs.map(async (job) => {
+        if (job.company && !companyMap[job.company]) {
+          try {
+            const res = await axios.get(`${COMPANY_API_END_POINT}/get/${job.company}`, {
+              withCredentials: true,
+            });
+            newMap[job.company] = res.data.company.name; // make sure backend sends `company.name`
+          } catch (error) {
+            console.error("Failed to fetch company:", error);
+          }
+        }
+      })
+    );
+
+    setCompanyMap(prev => ({ ...prev, ...newMap }));
+  };
+
+  if (allJobs.length > 0) fetchCompanies();
+}, [allJobs]);
+
   
   return (
     <div>
@@ -31,7 +68,7 @@ const AdminJobsTable = () => {
 
         <TableBody>
           {
-            alladminjobs.length === 0 ? (
+            allJobs.length === 0 ? (
               <TableRow>
                 <TableCell colSpan={4} className="text-center">
                   You have not registered any JOB
@@ -41,7 +78,8 @@ const AdminJobsTable = () => {
               filteredJobs.map((job) => (
                 <TableRow key={job._id}>
                   
-                  <TableCell>{job?.company?.name}</TableCell>
+                 <TableCell>{companyMap[job.company] || "Loading..."}</TableCell>
+
                   <TableCell>{job.title}</TableCell>
                   <TableCell>{new Date(job.createdAt).toLocaleDateString()}</TableCell>
                   <TableCell>

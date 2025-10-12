@@ -2,16 +2,23 @@ import React from 'react'
 import { Button } from './ui/button';
 import { Search } from 'lucide-react';
 import { useDispatch, useSelector } from 'react-redux';
-import { setSearchText } from './redux/filterSlice'; // import your action
+import { setSearchText,setSelectedCategory } from './redux/filterSlice'; // import your action
+import { useEffect } from 'react';
+
 
 
 export const HeroSection = () => {
-  const { searchText } = useSelector((state) => state.filter); // get current search text from Redux
+  const { searchText,selectedCategory } = useSelector((state) => state.filter); // get current search text from Redux
  
   const dispatch = useDispatch();
 const handleSearchChange = (e) => {
   dispatch(setSearchText(e.target.value));
+  //console.log("Search Text:", searchText);
 };
+useEffect(() => {
+  console.log("Updated searchText:", searchText);
+}, [searchText]);
+
 
   return (
     
@@ -24,7 +31,8 @@ const handleSearchChange = (e) => {
         <input type="text"
         placeholder='Find your Dream Jobs'
         className='outline-none border-none w-full rounded-2xl'
-        value={searchText}           // controlled input
+        value={searchText}
+                // controlled input
     onChange={handleSearchChange}/>
         <Button className="rounded-r-full bg-red-600" ><Search className="h-5 w-5" /></Button>
       </div>

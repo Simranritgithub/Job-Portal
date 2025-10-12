@@ -18,7 +18,13 @@ const Job = ({ job }) => {
       </div>
 
       <div className="flex items-center gap-3 my-4">
-        <AvatarPrimitive.Root className="w-12 h-12 rounded-full overflow-hidden border border-white">
+        <img
+  src={job.company?.logo || "https://c8.alamy.com/comp/2RDNN08/bucharest-romania-july-10-2023-the-logo-of-the-indian-multinational-wipro-technologies-is-seen-on-top-of-a-building-in-bucharest-this-image-is-f-2RDNN08.jpg"}
+  alt={job.company?.name || "Company Logo"}
+  className="w-12 h-12 rounded-full object-cover border border-gray-200"
+/>
+        {/*
+         <AvatarPrimitive.Root className="w-12 h-12 rounded-full overflow-hidden border border-white">
           <AvatarPrimitive.Image
             className="w-full h-full object-cover"
             src="https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8Y29tcGFueSUyMGxvZ298ZW58MHx8MHx8fDA%3D&w=1000&q=80"
@@ -27,7 +33,7 @@ const Job = ({ job }) => {
           <AvatarPrimitive.Fallback className="flex items-center justify-center w-full h-full bg-gray-200 text-gray-500 text-sm">
             CN
           </AvatarPrimitive.Fallback>
-        </AvatarPrimitive.Root>
+        </AvatarPrimitive.Root> */}
 
         <div>
           <h1 className="font-medium text-lg text-red-600">{job.company?.name}</h1>

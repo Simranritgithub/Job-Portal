@@ -68,7 +68,7 @@ const FilterCard = () => {
   };
 
   return (
-    <div className="p-4 w-full border rounded-md shadow min-h-screen bg-black">
+    <div className="p-4 w-full border rounded-md shadow min-h-screen bg-gradient-to-b from-[#0A0A0A] to-[#1A1A1A]">
       <h1 className="text-lg font-bold mb-3 text-red-600 mt-8">Filter Jobs</h1>
       <hr className="mb-4" />
 

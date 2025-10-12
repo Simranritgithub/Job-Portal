@@ -34,13 +34,13 @@ const Jobs = () => {
   return (
     <div>
       <Navbar />
-      <div className="flex max-w-7xl mx-auto -mt-10   ">
+      <div className="flex max-w-7xl mx-auto -mt-10   bg-gradient-to-b from-[#0A0A0A] to-[#1A1A1A]   ">
         <div className="w-[20%]">
           <FilterCard />
         </div>
 
         {filteredJobs.length === 0 ? (
-          <span className="text-slate-900 text-2xl font-bold flex justify-center items-center ml-80">
+          <span className="text-gray-200 text-2xl font-bold flex justify-center items-center ml-80 ">
             No jobs found
           </span>
         ) : (

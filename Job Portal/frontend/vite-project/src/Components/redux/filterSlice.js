@@ -8,7 +8,8 @@ const filterSlice = createSlice({
     company: "",
     location: "",
     title: "",
-    Salary:""
+    Salary:"",
+    selectedCategory:"",
     // Add more filters as needed
   },
   reducers: {
@@ -27,6 +28,9 @@ const filterSlice = createSlice({
     setSalary: (state, action) => {
       state.Salary = action.payload;
     },
+     setSelectedCategory: (state, action) => {
+      state.Salary = action.payload;
+    },
     resetFilters: (state) => {
       state.searchText = "";
       state.company = "";
@@ -43,7 +47,8 @@ export const {
   setLocation,
   settitle,
   resetFilters,
-  setSalary
+  setSalary,
+  setSelectedCategory
 } = filterSlice.actions;
 
 export default filterSlice.reducer;
