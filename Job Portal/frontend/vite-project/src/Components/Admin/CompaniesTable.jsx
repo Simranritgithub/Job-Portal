@@ -12,7 +12,10 @@ const CompaniesTable = () => {
   const [loading, setLoading] = useState(true);
   const navigate=useNavigate() ;
   const {searchText}=useSelector((state)=>state.filter  )
-  const filteredCompanies = companies.filter((company) =>
+  const sortedCompanies = [...companies].sort(
+    (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
+  );
+  const filteredCompanies = sortedCompanies.filter((company) =>
   company.name.toLowerCase().includes(searchText.toLowerCase())
 );
 

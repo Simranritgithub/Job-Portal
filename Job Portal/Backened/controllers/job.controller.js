@@ -1,11 +1,13 @@
 import { Job } from "../models/Job.model.js";
+import mongoose from "mongoose";
+
 
 export const postjob = async (req, res) => {
   try {
-    const { title, description, requirements, salary, location, jobType, experienceLevel, position, companyId } = req.body;
+    const { title, description, requirements, salary, location, jobtype, experienceLevel, position, companyId } = req.body;
     const userId = req.id;
 
-    if (!title || !description || !requirements || !salary || !location || !jobType || !experienceLevel || !position || !companyId) {
+    if (!title || !description || !requirements || !salary || !location || !jobtype || !experienceLevel || !position || !companyId) {
       return res.status(400).json({
         message: "Something is missing",
         success: false
@@ -18,10 +20,12 @@ export const postjob = async (req, res) => {
       requirements: requirements.split(","),
       salary: Number(salary),
       location,
-      jobType,
+      jobtype,
       experienceLevel,
       position,
-      company: companyId,
+      company: new mongoose.Types.ObjectId(companyId),
+
+
       created_by: userId
     });
 

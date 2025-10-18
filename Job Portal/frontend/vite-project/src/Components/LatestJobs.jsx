@@ -7,7 +7,9 @@ const LatestJobs = () => {
   const { searchText, title, location, company, Salary, selectedCategory } =
     useSelector((state) => state.filter);
   // ✅ from Redux store
-  const filteredJobs = allJobs.filter((job) => {
+  const sortedJobs = [...allJobs].sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+  console.log("Sorted Jobs:", sortedJobs);
+  const filteredJobs = sortedJobs.filter((job) => {
   const search = searchText.toLowerCase();
   return (
     job.title?.toLowerCase().includes(search) ||

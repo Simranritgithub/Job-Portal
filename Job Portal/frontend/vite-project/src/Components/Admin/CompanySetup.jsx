@@ -15,10 +15,12 @@ import axios from "axios";
 import toast, { Toaster } from "react-hot-toast";
 import { useParams } from "react-router-dom";
 import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 
 
 export default function CompanySetup() {
+  const navigate = useNavigate();
   const {companyId}=useParams();
   //console.log("Company ID from URL:", companyId);
 
@@ -116,7 +118,7 @@ finally {
 
       <main className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8 bg-slate-800">
         <div className="mb-8">
-          <button className="inline-flex items-center hover:text-gray-900 transition-colors  bg-red-600 text-gray-200 text-sm font-bold ">
+          <button className="inline-flex items-center hover:text-gray-900 transition-colors  bg-red-600 text-gray-200 text-sm font-bold " onClick={()=>navigate(`/admin/companies`)}>
             <ArrowLeft className="w-4 h-4 mr-2 bg-red-600 text-gray-200" />
             Back
           </button>
@@ -269,7 +271,7 @@ finally {
           <div className="flex items-center justify-end space-x-4 pt-6 border-t border-gray-200">
             <button
               type="button"
-              className="px-6 py-3 text-gray-700 font-medium hover:bg-gray-100 rounded-lg transition-colors"
+              className="px-6 py-3 text-gray-700 font-medium hover:bg-gray-100 rounded-lg transition-colors" onClick={()=>navigate(-1)}
             >
               Cancel
             </button>

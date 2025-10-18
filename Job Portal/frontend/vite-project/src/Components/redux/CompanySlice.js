@@ -9,11 +9,11 @@ const CompanySlice = createSlice({
     setSingleCompany: (state, action) => {
       state.singleCompany = action.payload;
     },
-    setCompanies: (state, action) => {
+    setallCompanies: (state, action) => {
       state.allcompanies = action.payload; // 👈 match
     }
   }
 });
 
-export const { setSingleCompany, setCompanies } = CompanySlice.actions;
+export const { setSingleCompany, setallCompanies } = CompanySlice.actions;
 export default CompanySlice.reducer;
