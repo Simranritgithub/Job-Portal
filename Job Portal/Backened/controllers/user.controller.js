@@ -1,4 +1,4 @@
-import { User } from "../models/user.model.js";
+import { User } from "../models/User.model.js";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import cloudinary from "cloudinary"; // Cloudinary for file upload
@@ -133,71 +133,59 @@ export const logout = async (req, res) => {
 export const updateProfile = async (req, res) => {
   try {
     const { fullname, email, mobileno, bio, skills } = req.body;
-    const file = req.file; // Assuming the file is being sent as multipart form-data
+    const file = req.file;
 
-    if (!req.user?.id) {
-      return res.status(401).json({
-        message: "Unauthorized access",
-        success: false,
-      });
+    if (!req.id) {
+      return res.status(401).json({ message: "Unauthorized access", success: false });
     }
 
-    // Find the user by ID
-    let user = await User.findById(req.user.id);
+    let user = await User.findById(req.id);
     if (!user) {
-      return res.status(404).json({
-        message: "User not found",
-        success: false,
-      });
+      return res.status(404).json({ message: "User not found", success: false });
     }
 
-    // Handle file upload if a file is provided
-    let resume = user.profile?.resume;
-    let resumeOriginalName = user.profile?.resumeOriginalName;
+    // Ensure profile exists
+    if (!user.profile) user.profile = {};
 
-    if (file) {
-      // Use getDataUri to process the file
-      const fileUri = getDataUri(file);
-      const cloudResponse = await cloudinary.uploader.upload(fileUri.content);
-
-      // If file uploaded successfully to Cloudinary, update the user's profile
-      resume = cloudResponse.secure_url;
-      resumeOriginalName = file.originalname;
-    }
-
-    // Update user data (excluding the file for now)
+    // Update basic info
     if (fullname) user.fullname = fullname;
     if (email) user.email = email;
     if (mobileno) user.mobileno = mobileno;
     if (bio) user.profile.bio = bio;
-    if (skills) user.profile.skills = skills.split(",").map((s) => s.trim());
 
-    // Update the resume URL if a file was uploaded
-    if (resume) {
-      user.profile.resume = resume;
-      user.profile.resumeOriginalName = resumeOriginalName;
+    // Update skills
+    if (skills) {
+      user.profile.skills = skills
+        .toString()
+        .split(",")
+        .map(s => s.trim())
+        .filter(s => s.length > 0);
+    }
+
+    // Update file if uploaded
+    if (file) {
+      const fileUri = getDataUri(file);
+      const cloudResponse = await cloudinary.uploader.upload(fileUri.content);
+      user.profile.resume = cloudResponse.secure_url;
+      user.profile.resumeOriginalName = file.originalname;
     }
 
     await user.save();
 
     return res.status(200).json({
       message: "Profile updated successfully",
+      success: true,
       user: {
         _id: user._id,
         fullname: user.fullname,
         email: user.email,
         mobileno: user.mobileno,
-        role: user.role,
         profile: user.profile,
       },
-      success: true,
     });
   } catch (error) {
     console.error("Error in updateProfile:", error);
-    res.status(500).json({
-      message: "Internal Server Error",
-      success: false,
-    });
+    res.status(500).json({ message: "Internal Server Error", success: false });
   }
 };
 

@@ -12,11 +12,13 @@ import { toast } from 'sonner';
 
 const ApplicantsTable = () => {
   const shortlistingStatus = ["accepted", "rejected"];
-  const { id: jobId } = useParams();
+  const { jobId } = useParams();
+  const{applicationId}=useParams();
  const handleOnStatus=async(applicationId,status)=>{
+  console.log("Updating status for Application ID:", applicationId, "to", status);
   try {
   const res = await axios.put(
-    `${APPLICATION_API_END_POINT}/application/${applicationId}/status`,
+    `${APPLICATION_API_END_POINT}/status/${applicationId}/update`,
     { status },
     {
       withCredentials: true,
@@ -33,7 +35,7 @@ const ApplicantsTable = () => {
 
 
   useGetallApplicants(jobId);
-  const { allapplicants = [] } = useSelector(store => store.job);
+  const { allapplicants =[] } = useSelector(state => state.job);
 
   return (
     <div>
@@ -58,15 +60,15 @@ const ApplicantsTable = () => {
               </TableCell>
             </TableRow>
           ) : (
-            allapplicants.map((application, index) => (
+            allapplicants.map((applications, index) => (
               <TableRow key={index}>
-                <TableCell>{application?.applicant?.fullname || 'N/A'}</TableCell>
-                <TableCell>{application?.applicant?.email || 'N/A'}</TableCell>
-                <TableCell>{application?.applicant?.mobileno || 'N/A'}</TableCell>
+                <TableCell>{applications?.applicant?.fullname || 'N/A'}</TableCell>
+                <TableCell>{applications?.applicant?.email || 'N/A'}</TableCell>
+                <TableCell>{applications?.applicant?.mobileno || 'N/A'}</TableCell>
                 <TableCell>
-                  {application?.applicant?.resume ? (
+                  {applications?.applicant?.resume ? (
                     <a
-                      href={application.resume}
+                      href={applications.resume}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="text-blue-500 underline"
@@ -76,7 +78,7 @@ const ApplicantsTable = () => {
                   ) : 'N/A'}
                 </TableCell>
                 <TableCell>
-                  {new Date(application?.createdAt).toLocaleDateString() || 'N/A'}
+                  {new Date(applications?.createdAt).toLocaleDateString() || 'N/A'}
                 </TableCell>
                 <TableCell>
                   <Popover>
@@ -85,7 +87,7 @@ const ApplicantsTable = () => {
                     </PopoverTrigger>
                     <PopoverContent>
                       {shortlistingStatus.map((status, i) => (
-                        <div key={i} onClick={() => handleOnStatus(application._id,status)}className="cursor-pointer hover:bg-gray-100 px-2 py-1 rounded">
+                        <div key={i} onClick={() => handleOnStatus(applications._id,status)}className="cursor-pointer hover:bg-gray-100 px-2 py-1 rounded">
                           <span>{status}</span>
                         </div>
                       ))}

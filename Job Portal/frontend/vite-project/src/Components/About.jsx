@@ -7,18 +7,20 @@ const About = () => {
  ">
       <Navbar />
 
-      <div className="max-w-5xl mx-auto px-4 py-12">
-        <h1 className="text-4xl font-bold mb-6 text-center text-red-600">About DreamJob Portal</h1>
+   <div className="max-w-5xl mx-auto px-6 py-24 sm:px-4 sm:py-12">
 
-        <p className="text-lg mb-6 text-center text-gray-300">
+
+        <h1 className=" text-base sm:text-4xl font-bold mt-4 pt-16  sm:mb-6 text-center text-red-600">About DreamJob Portal</h1>
+
+        <p className=" text-base sm:text-lg mb-6 text-center text-gray-300">
           DreamJob Portal is your ultimate career platform connecting job seekers with top employers.
           Whether you're looking to start your journey or hire the right talent, we've built the tools you need.
         </p>
 
         <div className="grid md:grid-cols-2 gap-8 mt-10">
           {/* For Job Seekers */}
-          <div className="bg-zinc-900 p-6 rounded-xl shadow-md border border-red-600">
-            <h2 className="text-2xl font-semibold mb-4 text-red-600">For Job Seekers</h2>
+          <div className="bg-zinc-900 p-3 sm:p-6 rounded-xl shadow-md border border-red-600">
+            <h2 className=" text-base sm:text-2xl font-semibold mb-4 text-red-600">For Job Seekers</h2>
             <ul className="list-disc pl-5 space-y-2 text-gray-300">
               <li>Create your profile and upload your resume.</li>
               <li>Search and apply for jobs with ease.</li>
@@ -28,8 +30,8 @@ const About = () => {
           </div>
 
           {/* For Employers */}
-          <div className="bg-zinc-900 p-6 rounded-xl shadow-md border border-red-600">
-            <h2 className="text-2xl font-semibold mb-4 text-red-600">For Employers</h2>
+          <div className="bg-zinc-900 p-3 sm:p-6  rounded-xl shadow-md border border-red-600">
+            <h2 className="text-base sm:text-2xl font-semibold mb-4 text-red-600">For Employers</h2>
             <ul className="list-disc pl-5 space-y-2 text-gray-300">
               <li>Register your company and post job listings.</li>
               <li>Access a wide pool of qualified candidates.</li>
@@ -40,8 +42,8 @@ const About = () => {
         </div>
 
         <div className="mt-12 text-center">
-          <h3 className="text-xl font-semibold mb-2 text-red-600">Why Choose DreamJob?</h3>
-          <p className="text-md max-w-2xl mx-auto text-gray-400">
+          <h3 className=" text-base sm:text-xl font-semibold mb-2 text-red-600">Why Choose DreamJob?</h3>
+          <p className=" text-base sm:text-md max-w-2xl mx-auto text-gray-400">
             We blend technology, speed, and simplicity to connect job seekers with the right opportunities and recruiters with the right talent.
             At DreamJob, your career or hiring goal is just a click away.
           </p>

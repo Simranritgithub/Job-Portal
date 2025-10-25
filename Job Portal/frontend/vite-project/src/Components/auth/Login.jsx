@@ -58,9 +58,9 @@ export const Login = () => {
   return (
     <div>
       <Navbar />
-      <div className="flex items-center justify-center w-full min-h-screen bg-black text-white">
-        <form onSubmit={submitHandler} className="w-full max-w-lg border border-red-600 rounded-md p-6 bg-black shadow-md">
-          <h1 className="font-bold text-3xl text-red-600 mb-6 text-center">Login</h1>
+      <div className="flex items-center justify-center w-full min-h-screen bg-black text-white px-4 pt-16  sm:px-0 sm:pt-0">
+        <form onSubmit={submitHandler} className="w-full max-w-lg border border-red-600 rounded-md p-6 sm:p-10  bg-black shadow-md">
+          <h1 className="font-bold  text-base sm:text-3xl text-red-600 mb-6 text-center">Login</h1>
 
           {/* Email */}
           <div className="mb-4">
@@ -125,7 +125,7 @@ export const Login = () => {
               <Loader2 className='mr-2 h-4 w-4 animate-spin' /> Please wait
             </Button>
           ) : (
-            <Button type="submit" className="w-full my-4 bg-red-600 text-white hover:bg-red-700">
+            <Button type="submit" className="w-full  text-base my-4 bg-red-600 text-white hover:bg-red-700">
               Login
             </Button>
           )}

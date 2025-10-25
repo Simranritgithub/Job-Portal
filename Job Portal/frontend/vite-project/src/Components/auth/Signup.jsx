@@ -71,16 +71,16 @@ export const Signup = () => {
   return (
     <div>
       <Navbar />
-      <div className="flex items-center justify-center w-full min-h-screen bg-gray-900">
+      <div className="flex items-center justify-center w-full min-h-screen bg-gray-900 px-4 sm:px-0 pt-16 sm:pt-0">
         <form
           onSubmit={submitHandler}
-          className="w-full max-w-lg border border-gray-700 rounded-md p-6 shadow-lg bg-black"
+          className="w-full sm:max-w-lg border border-gray-700 rounded-md  py-10 px-6 sm:p-6 shadow-lg bg-black"
         >
-          <h1 className="font-bold text-2xl mb-4 text-center text-[#F83008]">Sign Up</h1>
+          <h1 className="font-bold sm:text-2xl text-base  pt-24 sm:pt-0 mb-0 sm:mb-4 text-center text-[#F83008]">Sign Up</h1>
 
           {/* Full Name */}
-          <div className="mb-4">
-            <Label htmlFor="fullname" className="block text-sm text-red-600 font-bold">
+          <div className="  sm:pt-0 mb-4">
+            <Label htmlFor="fullname" className="block text-base  text-red-600 font-bold">
               Full Name
             </Label>
             <Input
@@ -97,7 +97,7 @@ export const Signup = () => {
 
           {/* Email */}
           <div className="mb-4">
-            <Label htmlFor="email" className="block text-sm font-bold text-red-600">
+            <Label htmlFor="email" className="block text-base font-bold text-red-600">
               Email
             </Label>
             <Input
@@ -114,7 +114,7 @@ export const Signup = () => {
 
           {/* Password */}
           <div className="mb-4">
-            <Label htmlFor="password" className="block text-sm font-bold text-red-600">
+            <Label htmlFor="password" className="block text-base font-bold text-red-600">
               Password
             </Label>
             <Input
@@ -131,7 +131,7 @@ export const Signup = () => {
 
           {/* Mobile Number */}
           <div className="mb-4">
-            <Label htmlFor="mobileno" className="block text-sm font-bold text-red-600">
+            <Label htmlFor="mobileno" className="block text-base font-bold text-red-600">
               Mobile Number
             </Label>
             <Input
@@ -148,7 +148,7 @@ export const Signup = () => {
 
           {/* Radio Group for Role */}
           <div className="my-5">
-            <Label className="block text-sm font-bold text-red-600 mb-2">User Type</Label>
+            <Label className="block text-base font-bold text-red-600 mb-2">User Type</Label>
             <div className="flex items-center gap-4">
               <div className="flex items-center space-x-2">
                 <Input
@@ -181,7 +181,7 @@ export const Signup = () => {
 
           {/* File Upload */}
           <div className="mb-4">
-            <Label htmlFor="profile" className="block text-sm font-bold text-red-600">
+            <Label htmlFor="profile" className="block text-base font-bold text-red-600">
               Profile Picture
             </Label>
             <Input
@@ -200,14 +200,14 @@ export const Signup = () => {
               Please wait
             </Button>
           ) : (
-            <Button type="submit" className="w-full my-4 text-white bg-red-600 font-bold">
+            <Button type="submit" className="w-full my-4 text-base  text-white bg-red-600 font-bold">
               Sign Up
             </Button>
           )}
 
-          <span>
+          <span className="text-base text-slate-200 sm:text-lg flex justify-center flex-col items-center ">
             Already have an account?{" "}
-            <a href="/login" className="text-red-600 items-center">
+            <a href="/login" className=" text-red-600 text-base font-semibold  ">
               LOGIN
             </a>
           </span>

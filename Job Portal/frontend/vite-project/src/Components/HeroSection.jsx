@@ -22,15 +22,15 @@ useEffect(() => {
 
   return (
     
-    <div className='  text-centre'>
-      <div className='flex flex-col gap-4 my-10'>
-      <span className='  mx-auto px-4 py-2 rounded-full  text-[#f93636] font-bold'>DREAM JOB PORTAL</span>
-      <h1 className=' mx-auto text-5xl font-bold text-white'>Search,Apply &<br/>Get Your <span className='text-red-600'>Dream Jobs</span></h1>
+    <div className='  text-center px-4 sm:px-0 '>
+      <div className='flex flex-col  gap-2 pt-60 sm:pt-10 sm:gap-4 sm:my-10'>
+      <span className='  mx-auto  rounded-full  text-[#f93636]  text-base sm:text-3xl font-bold'>DREAM JOB PORTAL</span>
+      <h1 className=' mx-auto text-base sm:text-5xl font-bold text-white'>Search,Apply &<br/>Get Your <span className='text-red-600'>Dream Jobs</span></h1>
       <p className='mx-auto'>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Totam enim reprehenderit rep.</p>
-      <div className='flex w-[40%] shadow-lg border border-gray-200 pl-2 rounded-full items-centre gap-2 mx-auto bg-slate-200'>
+      <div className='flex w-full sm:w-[40%] shadow-lg border border-gray-200 pl-2 rounded-full items-center gap-2 mx-auto bg-slate-200'>
         <input type="text"
         placeholder='Find your Dream Jobs'
-        className='outline-none border-none w-full rounded-2xl'
+        className='outline-none w-full rounded-2xl text-sm xs:text-base px-4 py-2 border border-gray-300 focus:border-red-600 focus:border-2 transition-all'
         value={searchText}
                 // controlled input
     onChange={handleSearchChange}/>

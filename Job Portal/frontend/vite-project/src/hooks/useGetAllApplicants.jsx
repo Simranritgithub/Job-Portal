@@ -6,13 +6,13 @@ import axios from 'axios';
 import { useDispatch } from 'react-redux';
 import { setAllApplicants } from '@/Components/redux/jobSlice';
 
-const useGetallApplicants = (userId) => {
+const useGetallApplicants = (jobId) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
     const fetchAllApplicants = async () => {
       try {
-        const res = await axios.get(`${APPLICATION_API_END_POINT}/job/${jobId}/Applicants`,
+        const res = await axios.get(`${APPLICATION_API_END_POINT}/${jobId}/applicants`,
           {
             withCredentials:true
           }

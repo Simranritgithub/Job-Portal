@@ -27,12 +27,12 @@ const LatestJobs = () => {
   console.log("Redux allJobs:", allJobs);
 
   return (
-    <div className="max-w-7xl mx-auto my-20">
-      <h1 className="text-4xl font-bold text-white">
+    <div className="max-w-7xl mx-auto my-8 px-4 sm:px-0 sm:my-20">
+      <h1 className="text-base sm:text-4xl font-bold text-white">
         Latest & Top <span className="text-red-600">Job Openings</span>
       </h1>
 
-      <div className="grid grid-cols-3 gap-4 my-5">
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 sm:gap-4 my-2 sm:my-5">
         {filteredJobs.length > 0 ? (
           filteredJobs.slice(0, 6).map((job) => {
             const companyName = job.company?.name || "Unknown Company";

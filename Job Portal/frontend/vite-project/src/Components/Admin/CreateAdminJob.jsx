@@ -1,8 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { use, useEffect, useState } from "react";
 import { Button } from "../ui/button";
 import Navbar from "../shared/Navbar";
 import { Label } from "../ui/Label";
 import { Input } from "../ui/Input";
+import { useDispatch } from "react-redux";
+//import { useEffect } from "react";
 import { JOB_API_END_POINT } from "@/Components/utils/constant";
 import axios from "axios";
 import {
@@ -26,6 +28,8 @@ const CreateAdminJob = () => {
   const sortedCompanies = [...allcompanies].sort(
     (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
   );
+  useEffect(() => {
+  console.log("All Companies:", sortedCompanies);}, [sortedCompanies]);
 
   const [input, setInput] = useState({
     title: "",

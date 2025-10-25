@@ -5,15 +5,16 @@ import { Input } from "./ui/input";
 import { Button } from "./ui/button";
 import { useSelector, useDispatch } from "react-redux";
 import { updateUserProfile } from "./redux/authSlice";
+import { toast } from "sonner";
+import { USER_API_END_POINT } from "./utils/constant";
+import axios from "axios";
 
 const UpdatedProfileDialogue = ({ open, setOpen }) => {
   const [loading, setLoading] = useState(false);
   const { user } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
 
-  if (!user) {
-    return <div>Loading...</div>;
-  }
+  if (!user) return <div>Loading...</div>;
 
   const [input, setInput] = useState({
     fullname: user?.fullname || "",
@@ -46,60 +47,43 @@ const UpdatedProfileDialogue = ({ open, setOpen }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setLoading(true);
-
-    const newErrors = validateForm();
-    if (Object.keys(newErrors).length > 0) {
-      setErrors(newErrors);
-      setLoading(false);
+    const formErrors = validateForm();
+    if (Object.keys(formErrors).length) {
+      setErrors(formErrors);
       return;
     }
 
-    const updatedSkills = input.skills.split(",").map((skill) => skill.trim());
-
-    const updatedProfileData = {
-      fullname: input.fullname,
-      email: input.email,
-      mobileno: input.mobileno,
-      bio: input.bio,
-      skills: updatedSkills,
-    };
-
     try {
-      await dispatch(updateUserProfile(updatedProfileData));
+      setLoading(true);
 
-      if (input.file) {
-        const formData = new FormData();
-        formData.append("file", input.file);
+      // Use FormData for file + other fields
+      const formData = new FormData();
+      formData.append("fullname", input.fullname);
+      formData.append("email", input.email);
+      formData.append("mobileno", input.mobileno);
+      formData.append("bio", input.bio);
+      formData.append("skills", input.skills.trim());
+      if (input.file) formData.append("file", input.file);
 
-        const response = await fetch("/api/v1/user/upload-resume", {
-          method: "POST",
-          body: formData,
-        });
+      const res = await axios.put(`${USER_API_END_POINT}/profile/update`, formData, {
+        withCredentials: true,
+        headers: { "Content-Type": "multipart/form-data" },
+      });
 
-        if (response.ok) {
-          const contentType = response.headers.get("content-type");
-          if (contentType && contentType.includes("application/json")) {
-            const data = await response.json();
-            if (data.success) {
-              console.log("File uploaded successfully");
-            } else {
-              console.error("File upload failed:", data.message);
-            }
-          } else {
-            console.warn("File uploaded but server returned non-JSON response.");
-          }
-        } else {
-          console.error("File upload request failed with status", response.status);
-        }
+      if (res.data.success) {
+        toast.success(res.data.message);
+        dispatch(updateUserProfile(res.data.user));
+        setOpen(false);
+      } else {
+        toast.error(res.data.message || "Failed to update profile");
       }
-
-      setOpen(false);
+      console.log("Profile updated successfully:", req.body);
     } catch (error) {
-      console.error("Failed to update profile:", error);
+      console.error("Error in updating profile:", error.response?.data?.message || error.message);
+      toast.error(error.response?.data?.message || "Server error");
+    } finally {
+      setLoading(false);
     }
-
-    setLoading(false);
   };
 
   return (
@@ -116,7 +100,7 @@ const UpdatedProfileDialogue = ({ open, setOpen }) => {
         </DialogHeader>
 
         <p id="dialog-description" className="sr-only">
-          Please update your profile information. You can modify your name, email, phone number, bio, skills, and upload a resume.
+          Update your profile information: name, email, phone, bio, skills, and upload a resume.
         </p>
 
         <form onSubmit={handleSubmit}>
@@ -161,7 +145,7 @@ const UpdatedProfileDialogue = ({ open, setOpen }) => {
             </div>
           </div>
 
-          <DialogFooter className="mt-4">
+          <DialogFooter className="mt-4 flex justify-end gap-4">
             <Button
               type="button"
               variant="outline"

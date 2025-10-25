@@ -44,7 +44,7 @@ const CreateCompany = () => {
         toast.error(res?.data?.message || "Something went wrong");
       }
     } catch (error) {
-      console.log(error);
+      console.log(error.message);
       toast.error(error?.response?.data?.message || "Server error");
     }
   };

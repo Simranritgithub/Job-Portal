@@ -144,6 +144,8 @@ export const getApplicants = async (req, res) => {
 
     return res.status(200).json({
       job,
+      count: job.applications.length,
+      applicants: job.applications,
       success: true
     });
 

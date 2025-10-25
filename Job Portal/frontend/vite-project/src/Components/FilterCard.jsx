@@ -68,16 +68,17 @@ const FilterCard = () => {
   };
 
   return (
-    <div className="p-4 w-full border rounded-md shadow min-h-screen bg-gradient-to-b from-[#0A0A0A] to-[#1A1A1A]">
-      <h1 className="text-lg font-bold mb-3 text-red-600 mt-8">Filter Jobs</h1>
+    <div className="p-4 sm:p-4 w-full border rounded-md shadow min-h-screen bg-gradient-to-b from-[#0A0A0A] to-[#1A1A1A]">
+      <h1 className="text-lg sm:text-2xl font-bold mb-4 text-red-600 mt-16 sm:mt-8">Filter Jobs</h1>
+
       <hr className="mb-4" />
 
       {filterData.map((data, index) => (
         <div key={index} className="mb-4">
-          <h2 className="font-semibold mb-2 text-red-600">{data.filterType}</h2>
+          <h2 className="sm:font-semibold sm:text-lg text-base mb-2 text-red-600">{data.filterType}</h2>
 
           <RadioGroup.Root
-            className="space-y-2 text-white "
+            className="space-y-2 text-white text-base sm:text-lg  "
             value={selectedFilters[data.filterType] || undefined} // ✅ controlled
             onValueChange={(value) => handleFilterChange(data.filterType, value)}
           >
@@ -91,7 +92,7 @@ const FilterCard = () => {
   value={label}
   id={itemId}
   className={`
-    w-3 h-3 border border-red-600 rounded-full
+    sm:w-3 w-2 h-3 border border-red-600 rounded-full
     flex items-center justify-center
     data-[state=checked]:bg-red-600
     data-[state=unchecked]:bg-transparent

@@ -3,6 +3,7 @@ import Navbar from '../shared/Navbar'
 import ApplicantsTable from './ApplicantsTable'
 
 const Applicants = () => {
+  
     
   return (
     <div>

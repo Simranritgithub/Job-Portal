@@ -21,7 +21,8 @@ router.route("/login").post(login);
 router.route("/logout").get(logout);
 
 // Update profile (no file)
-router.route("/profile/update").put(isAuthenticated, updateProfile);
+router.put('/profile/update', isAuthenticated,  updateProfile);
+
 
 // ✅ NEW: Upload resume (file upload)
 router

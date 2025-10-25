@@ -11,10 +11,10 @@ const LatestJobCards = ({ company, location, title, salary, jobType, positions,i
   if (!company || !title || !location) return null;
 
   return (
-    <div className="p-6 rounded-xl shadow-lg border border-gray-700 text-white bg-[#111827]">
-      <h3 className="text-xl font-semibold">{company}</h3>
+    <div className=" p-2 sm:p-6 rounded-xl shadow-lg border border-gray-700 text-white bg-[#111827]">
+      <h3 className="  text-base sm:text-xl font-semibold">{company}</h3>
       <p className="text-gray-400">{location}</p>
-      <h4 className="mt-2 text-lg font-medium">{title}</h4>
+      <h4 className="mt-2 text-base sm:text-lg font-medium">{title}</h4>
 
       <div className="flex items-center gap-2 mt-4 flex-wrap">
         <Badge className="text-white font-bold" variant="ghost">
@@ -28,7 +28,7 @@ const LatestJobCards = ({ company, location, title, salary, jobType, positions,i
         </Badge>
       </div>
 
-      <Button className="h-10 mt-4 bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600 transition "onClick={() => navigate(`/description/${id}`)}>
+      <Button className="h-10 mt-4 bg-red-500 text-white px-2 py-1 sm:px-4 sm:py-2 rounded-lg hover:bg-red-600 transition "onClick={() => navigate(`/description/${id}`)}>
         Apply Now
       </Button>
     </div>
