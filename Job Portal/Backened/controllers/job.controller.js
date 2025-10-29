@@ -23,8 +23,8 @@ export const postjob = async (req, res) => {
       jobtype,
       experienceLevel,
       position,
-      //company: new mongoose.Types.ObjectId(companyId),
-      company:companyId,
+      company: new mongoose.Types.ObjectId(companyId),
+      //company:companyId,
       created_by: userId
     });
 

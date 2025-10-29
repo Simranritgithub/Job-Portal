@@ -1,13 +1,36 @@
-import React from 'react';
+import React, { use } from 'react';
 import { Link } from 'react-router-dom';
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { Avatar, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { LogOut, User2 } from 'lucide-react';
 import { useSelector } from 'react-redux';
+import { toast } from 'sonner';
+import axios from 'axios';
+import { USER_API_END_POINT } from '../utils/constant';
+import { useNavigate } from 'react-router-dom';
 
 const Navbar = () => {
   const { user } = useSelector(store => store.auth);
+  const Navigate =useNavigate();
+  const handleonLogout = async() => {
+    try{
+      const response = await axios.get(`${USER_API_END_POINT}/logout`, {
+        withCredentials: true,
+      });
+      if(response.data.success){
+        toast.success(response.data.message);
+        console.log("Logout successful");
+        Navigate("/login");
+      }
+
+    }
+    catch(error){
+      console.error("Logout failed:", error);
+      toast.error("Logout failed. Please try again.");
+    }
+    
+  }
 
   return (
     <>
@@ -78,7 +101,7 @@ const Navbar = () => {
                     
                     <div className='flex w-fit items-center gap-2 cursor-pointer'>
                       <LogOut className="w-5 h-5" />
-                      <Button variant="link" className="text-gray-700 hover:text-gray-900">LOGOUT</Button>
+                      <Button variant="link" className="text-gray-700 hover:text-gray-900" onClick={handleonLogout}>LOGOUT</Button>
                     </div>
                   </div>
                 </PopoverContent>
